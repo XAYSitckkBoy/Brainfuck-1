@@ -1,7 +1,7 @@
 use std::io;
 
 fn main() {
-    println!("Simple Calculator");
+    println!("improve brianfuck");
 
     loop {
         println!("Enter the first number:");
