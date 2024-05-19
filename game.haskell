@@ -1,0 +1,22 @@
+import System.Random (randomRIO)
+
+main :: IO ()
+main = do
+    putStrLn "Welcome to the Guessing Game!"
+    secretNumber <- randomRIO (1, 100)
+    playGame secretNumber
+
+playGame :: Int -> IO ()
+playGame secretNumber = do
+    putStrLn "Guess a number between 1 and 100:"
+    guess <- getLine
+    case reads guess of
+        [(n, "")] -> do
+            case compare n secretNumber of
+                LT -> putStrLn "Too low! Try again."
+                GT -> putStrLn "Too high! Try again."
+                EQ -> putStrLn "Congratulations! You guessed the number!"
+            if n /= secretNumber then playGame secretNumber else return ()
+        _ -> do
+            putStrLn "Invalid input. Please enter a number."
+            playGame secretNumber
